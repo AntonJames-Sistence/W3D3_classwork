@@ -57,3 +57,54 @@ end
 
 # p deep_dup([1, 2, 3, [4, 5, 6]])
 # p deep_dup(["a", "b", "c", ["d", "e", "f"]])
+
+def iter_fib(n)
+    seq = [0, 1]
+
+    while seq.length < n
+        seq << seq[-1] + seq[-2]
+    end
+
+    seq
+end
+
+# p iter_fib(5)
+# p iter_fib(2)
+
+def rec_fib(n)
+    return [0] if n == 1
+    return [0, 1] if n == 2
+
+    seq = rec_fib(n-1)
+    seq << seq[-1] + seq[-2]
+end
+
+# p rec_fib(7)
+# p rec_fib(2)
+
+def bsearch(array, target)
+    middle_idx = array.length / 2
+    return middle_idx if array[middle_idx] == target 
+    return nil if array.length == 1
+    
+    
+
+    if array[middle_idx] < target
+        # debugger
+        return bsearch(array[middle_idx..-1], target) + array[0...middle_idx].length
+    else
+        return bsearch(array[0...middle_idx], target)
+    end
+
+end
+
+# middle_idx = array.length / 2 => num
+# return middle_idx if array[middle_idx] == target
+
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
