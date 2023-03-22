@@ -110,26 +110,37 @@ end
 def merge_sort(array)
     return [] if array.length == 0
     return array if array.length == 1
-    new_array = []
     middle_idx = array.length / 2
     left_part = array[0...middle_idx]
     right_part = array[middle_idx..-1]
-    merge_sort(left_part) 
-
+    left_sorted = merge_sort(left_part)
+    right_sorted = merge_sort(right_part)
+    merge(left_sorted, right_sorted)
 end
 
-def merge(*array)
-    return array if array.length == 1
-    i = 0
-    while i < array.length - 1
-        if array[0] < array[1]
-            return array[0] += array[1]
-        else
-            return array[1] += array[0]
+def merge(leftarr, rightarr)
+    new_array = []
+    until leftarr.empty? || rightarr.empty?
+        if leftarr[0] < rightarr[0]
+            new_array << leftarr.shift
+        else   
+            new_array << rightarr.shift
         end
-        i += 2
     end
+    new_array + leftarr + rightarr
 end
 
-p merge_sort([2, 5, 8, 23, 6, 9])
+# p merge_sort([2, 5, 8, 23, 6, 9])
+
+def subsets(array)
+    result = []
+    i = 0
+    while i < array.length
+        result << subsets(array[i..-1])
+        i += 1
+    end
+    result
+end
+
+# p subsets([1, 2, 3])
 
