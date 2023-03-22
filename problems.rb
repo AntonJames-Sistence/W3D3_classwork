@@ -87,15 +87,12 @@ def bsearch(array, target)
     return middle_idx if array[middle_idx] == target 
     return nil if array.length == 1
     
-    
-
     if array[middle_idx] < target
         # debugger
-        return bsearch(array[middle_idx..-1], target) + array[0...middle_idx].length
+        return bsearch(array[middle_idx..-1], target) + array[0...middle_idx].length if bsearch(array[middle_idx..-1], target) != nil
     else
         return bsearch(array[0...middle_idx], target)
     end
-
 end
 
 # middle_idx = array.length / 2 => num
@@ -108,3 +105,31 @@ end
 # p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
 # p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
 # p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+
+
+def merge_sort(array)
+    return [] if array.length == 0
+    return array if array.length == 1
+    new_array = []
+    middle_idx = array.length / 2
+    left_part = array[0...middle_idx]
+    right_part = array[middle_idx..-1]
+    merge_sort(left_part) 
+
+end
+
+def merge(*array)
+    return array if array.length == 1
+    i = 0
+    while i < array.length - 1
+        if array[0] < array[1]
+            return array[0] += array[1]
+        else
+            return array[1] += array[0]
+        end
+        i += 2
+    end
+end
+
+p merge_sort([2, 5, 8, 23, 6, 9])
+
